@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Initiating Faculty Appointments and Promotions</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #002D72 0%, #004a9d 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: #FFFFFF;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 45, 114, 0.15);
+            max-width: 700px;
+            width: 100%;
+            padding: 40px;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            margin-bottom: 30px;
+            border-bottom: 3px solid #002D72;
+            padding-bottom: 20px;
+        }
+
+        h1 {
+            color: #002D72;
+            font-size: 28px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .question-number {
+            color: #002D72;
+            font-weight: 700;
+            margin-bottom: 15px;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .question {
+            color: #002D72;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .dropdown-wrapper {
+            margin-bottom: 25px;
+        }
+
+        select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #002D72;
+            border-radius: 8px;
+            font-size: 16px;
+            background: #FFFFFF;
+            color: #002D72;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23002D72' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            padding-right: 40px;
+        }
+
+        select:hover {
+            border-color: #004a9d;
+            box-shadow: 0 4px 12px rgba(0, 45, 114, 0.1);
+        }
+
+        select:focus {
+            outline: none;
+            border-color: #004a9d;
+            box-shadow: 0 0 0 3px rgba(0, 45, 114, 0.1);
+        }
+
+        .result {
+            background: #f5f5f5;
+            border-left: 4px solid #002D72;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 25px;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .result-title {
+            color: #002D72;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 12px;
+        }
+
+        .result-text {
+            color: #333;
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .result-text a {
+            color: #002D72;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s ease;
+        }
+
+        .result-text a:hover {
+            color: #004a9d;
+            text-decoration: underline;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            flex: 1;
+            min-width: 140px;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-next {
+            background: #002D72;
+            color: #FFFFFF;
+        }
+
+        .btn-next:hover {
+            background: #004a9d;
+            box-shadow: 0 4px 12px rgba(0, 45, 114, 0.3);
+        }
+
+        .btn-next:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        .btn-back {
+            background: #f0f0f0;
+            color: #002D72;
+            border: 2px solid #002D72;
+        }
+
+        .btn-back:hover {
+            background: #e8e8e8;
+        }
+
+        .btn-reset {
+            background: #f0f0f0;
+            color: #002D72;
+            border: 2px solid #002D72;
+        }
+
+        .btn-reset:hover {
+            background: #e8e8e8;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .progress {
+            margin-bottom: 25px;
+            color: #666;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: #e8e8e8;
+            border-radius: 3px;
+            margin-top: 8px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #002D72;
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 25px;
+            }
+
+            h1 {
+                font-size: 22px;
+            }
+
+            .question {
+                font-size: 16px;
+            }
+
+            button {
+                min-width: 100px;
+                padding: 10px 15px;
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Initiating Faculty Appointments and Promotions</h1>
+            <p class="subtitle">Johns Hopkins University — Administrative Guide</p>
+        </div>
+
+        <div id="progress" class="progress hidden">
+            <span id="progressText"></span>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+        </div>
+
+        <div id="questionContainer">
+            <div class="question-number" id="questionNumber"></div>
+            <div class="question" id="questionText"></div>
+            <div class="dropdown-wrapper">
+                <select id="answerDropdown">
+                    <option value="">Select an option...</option>
+                </select>
+            </div>
+        </div>
+
+        <div id="resultContainer" class="result hidden">
+            <div class="result-title">Recommendation</div>
+            <div class="result-text" id="resultText"></div>
+        </div>
+
+        <div class="button-group">
+            <button id="btnBack" class="btn-back hidden">← Back</button>
+            <button id="btnNext" class="btn-next">Next →</button>
+            <button id="btnReset" class="btn-reset hidden">Reset</button>
+        </div>
+    </div>
+
+    <script>
+        // Decision tree data structure
+        const decisionTree = {
+            root: {
+                question: "What is the candidate's aspirational rank?",
+                answers: {
+                    "Professor": "Aubrey Poysa (apoysa1@jhu.edu)",
+                    "Associate Professor": "Aubrey Poysa (apoysa1@jhu.edu)",
+                    "Assistant Professor": "Sheri Green (sheri@jhu.edu)",
+                    "Research Professor": 2,
+                    "Associate Research Professor": 3,
+                    "Assistant Research Professor": "Kirstin Brooks-Robinson (wseacademicappta@jhu.edu)",
+                    "Teaching Professor": 4,
+                    "Associate Teaching Professor": 5,
+                    "Assistant Teaching Professor": "Kirstin Brooks-Robinson (wseacademicappta@jhu.edu)",
+                    "Professor of the Practice": "Kirstin Brooks-Robinson (wseacademicappta@jhu.edu)",
+                    "Senior Research Engineer/Scientist": 6,
+                    "Associate Research Engineer/Scientist": 7,
+                    "Assistant Research Engineer/Scientist": "Kirstin Brooks-Robinson (wseacademicappta@jhu.edu)",
+                    "Senior Lecturer (part-time or short-term only)": 8,
+                    "Lecturer (part-time or short-term only)": "Kirstin Brooks-Robinson (wseacademicappta@jhu.edu)",
+                    "Visiting Professor": "Kirstin Brooks-Robinson (wseacademicappta@jhu.edu)",
+                    "Visiting Associate Professor": "Kirstin Brooks-Robinson (wseacademicappta@jhu.edu)",
+                    "Visiting Assistant Professor": "Kirstin Brooks-Robinson (wseacademicappta@jhu.edu)",
+                    "Visiting Scholar": "Kirstin Brooks-Robinson (wseacademicappta@jhu.edu)",
+                    "Whiting Fellow": "Kirstin Brooks-Robinson (wseacademicappta@jhu.edu)",
+                    "Homewood Professor": "Kirstin Brooks-Robinson (wseacademicappta@jhu.edu)"
+                }
+            },
+            2: {
+                question: "Does the candidate currently have an appointment as Associate or Assistant Research Professor?",
+                answers: {
+                    "Yes": "Kirstin Brooks-Robinson (wseacademicappta@jhu.edu)",
+                    "No": "Kirstin Brooks-Robinson (wseacademicappta@jhu.edu)"
+                }
+            },
+            3: {
+                question: "Does the candidate currently have an appointment as Assistant Research Professor?",
+                answers: {
+                    "Yes": "Kirstin Brooks-Robinson (wseacademicappta@jhu.edu)",
+                    "No": "Kirstin Brooks-Robinson (wseacademicappta@jhu.edu)"
+                }
+            },
+            4: {
+                question: "Does the candidate currently have an appointment as Associate or Assistant Teaching Professor?",
+                answers: {
+                    "Yes": "Kirstin Brooks-Robinson (wseacademicappta@jhu.edu)",
+                    "No": "Kirstin Brooks-Robinson (wseacademicappta@jhu.edu)"
+                }
+            },
+            5: {
+                question: "Does the candidate currently have an appointment as Assistant Teaching Professor?",
+                answers: {
+                    "Yes": "Kirstin Brooks-Robinson (wseacademicappta@jhu.edu)",
+                    "No": "Kirstin Brooks-Robinson (wseacademicappta@jhu.edu)"
+                }
+            },
+            6: {
+                question: "Does the candidate currently have an appointment as Associate or Assistant Research Engineer/Scientist?",
+                answers: {
+                    "Yes": "Kirstin Brooks-Robinson (wseacademicappta@jhu.edu)",
+                    "No": "Kirstin Brooks-Robinson (wseacademicappta@jhu.edu)"
+                }
+            },
+            7: {
+                question: "Does the candidate currently have an appointment as Assistant Research Engineer/Scientist?",
+                answers: {
+                    "Yes": "Kirstin Brooks-Robinson (wseacademicappta@jhu.edu)",
+                    "No": "Kirstin Brooks-Robinson (wseacademicappta@jhu.edu)"
+                }
+            },
+            8: {
+                question: "Does the candidate currently have an appointment as Lecturer?",
+                answers: {
+                    "Yes": "Kirstin Brooks-Robinson (wseacademicappta@jhu.edu)",
+                    "No": "Kirstin Brooks-Robinson (wseacademicappta@jhu.edu)"
+                }
+            }
+        };
+
+        // State management
+        let currentNode = 'root';
+        let history = [];
+        let totalSteps = 0;
+
+        // DOM elements
+        const questionContainer = document.getElementById('questionContainer');
+        const resultContainer = document.getElementById('resultContainer');
+        const questionNumber = document.getElementById('questionNumber');
+        const questionText = document.getElementById('questionText');
+        const answerDropdown = document.getElementById('answerDropdown');
+        const resultText = document.getElementById('resultText');
+        const btnBack = document.getElementById('btnBack');
+        const btnNext = document.getElementById('btnNext');
+        const btnReset = document.getElementById('btnReset');
+        const progress = document.getElementById('progress');
+        const progressText = document.getElementById('progressText');
+        const progressFill = document.getElementById('progressFill');
+
+        // Count total possible steps
+        function countTotalSteps() {
+            let max = 1;
+            for (let nodeId in decisionTree) {
+                if (nodeId !== 'root') {
+                    max = Math.max(max, parseInt(nodeId));
+                }
+            }
+            return max + 1;
+        }
+
+        totalSteps = countTotalSteps();
+
+        // Initialize
+        function init() {
+            currentNode = 'root';
+            history = [];
+            renderQuestion();
+            updateProgress();
+        }
+
+        // Render current question
+        function renderQuestion() {
+            const node = decisionTree[currentNode];
+            
+            // Update question display
+            questionNumber.textContent = `Question ${history.length + 1}`;
+            questionText.textContent = node.question;
+
+            // Clear and populate dropdown
+            answerDropdown.innerHTML = '<option value="">Select an option...</option>';
+            for (let answer in node.answers) {
+                const option = document.createElement('option');
+                option.value = answer;
+                option.textContent = answer;
+                answerDropdown.appendChild(option);
+            }
+            answerDropdown.value = '';
+
+            // Show/hide containers
+            questionContainer.classList.remove('hidden');
+            resultContainer.classList.add('hidden');
+
+            // Update button states
+            btnBack.classList.toggle('hidden', history.length === 0);
+            btnNext.disabled = true;
+            btnReset.classList.add('hidden');
+            progress.classList.remove('hidden');
+
+            updateProgress();
+        }
+
+        // Handle next button
+        btnNext.addEventListener('click', () => {
+            const selectedAnswer = answerDropdown.value;
+            if (!selectedAnswer) return;
+
+            const node = decisionTree[currentNode];
+            const result = node.answers[selectedAnswer];
+
+            history.push({ node: currentNode, answer: selectedAnswer });
+
+            if (typeof result === 'string') {
+                // Terminal node - show result
+                showResult(selectedAnswer, result);
+            } else {
+                // Continue to next node
+                currentNode = result;
+                renderQuestion();
+            }
+        });
+
+        // Show result
+        function showResult(answer, contact) {
+            const node = decisionTree[currentNode];
+            
+            questionContainer.classList.add('hidden');
+            resultContainer.classList.remove('hidden');
+
+            let htmlContent = '';
+            
+            // Determine the action based on the result
+            if (contact.includes('@jhu.edu')) {
+                const emailParts = contact.match(/([^(]+)\s*\(([^)]+)\)/);
+                if (emailParts) {
+                    const name = emailParts[1].trim();
+                    const email = emailParts[2].trim();
+                    htmlContent = `Request a new case in <strong>Interfolio RPT</strong> by contacting:<br><br>
+                    <strong>${name}</strong><br>
+                    <a href="mailto:${email}">${email}</a>`;
+                }
+            } else {
+                htmlContent = `${contact}<br><br>
+                Start an appointment request in <strong>SmartPath</strong>. Direct questions to:<br>
+                <strong>Kirstin Brooks-Robinson</strong><br>
+                <a href="mailto:wseacademicappta@jhu.edu">wseacademicappta@jhu.edu</a>`;
+            }
+
+            // Check if this is a promotion path
+            if (history.length > 1) {
+                const firstNode = decisionTree[currentNode];
+                if (firstNode && firstNode.question.includes('appointment')) {
+                    htmlContent = `Email promotion dossier to:<br><br>
+                    <strong>Kirstin Brooks-Robinson</strong><br>
+                    <a href="mailto:wseacademicappta@jhu.edu">wseacademicappta@jhu.edu</a>`;
+                }
+            }
+
+            resultText.innerHTML = htmlContent;
+
+            // Update buttons
+            btnBack.classList.remove('hidden');
+            btnNext.classList.add('hidden');
+            btnReset.classList.remove('hidden');
+            progress.classList.add('hidden');
+        }
+
+        // Handle back button
+        btnBack.addEventListener('click', () => {
+            if (history.length > 0) {
+                history.pop();
+                currentNode = history.length > 0 ? history[history.length - 1].node : 'root';
+                
+                if (history.length > 0) {
+                    const prevAnswer = history[history.length - 1].answer;
+                    const prevNode = decisionTree[history[history.length - 1].node];
+                    const result = prevNode.answers[prevAnswer];
+                    
+                    if (typeof result === 'string') {
+                        history.pop();
+                        currentNode = 'root';
+                    } else {
+                        currentNode = result;
+                    }
+                } else {
+                    currentNode = 'root';
+                }
+                
+                history.pop();
+                renderQuestion();
+            }
+        });
+
+        // Handle reset button
+        btnReset.addEventListener('click', () => {
+            init();
+        });
+
+        // Handle dropdown change
+        answerDropdown.addEventListener('change', (e) => {
+            btnNext.disabled = e.target.value === '';
+        });
+
+        // Update progress bar
+        function updateProgress() {
+            const stepCount = history.length + 1;
+            progressText.textContent = `Step ${stepCount} of ${totalSteps}`;
+            progressFill.style.width = (stepCount / totalSteps) * 100 + '%';
+        }
+
+        // Start the application
+        init();
+    </script>
+</body>
+</html>
