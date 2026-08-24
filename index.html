@@ -305,9 +305,9 @@
             root: {
                 question: "What is the candidate's aspirational rank?",
                 answers: {
-                    "Professor": { type: "terminal", contact: "Aubrey Poysa", email: "apoysa1@jhu.edu", action: "Interfolio RPT" },
-                    "Associate Professor": { type: "terminal", contact: "Aubrey Poysa", email: "apoysa1@jhu.edu", action: "Interfolio RPT" },
-                    "Assistant Professor": { type: "terminal", contact: "Sheri Green", email: "sheri@jhu.edu", action: "Interfolio RPT" },
+                    "Professor": { type: "terminal", contact: "Aubrey Poysa", email: "apoysa1@jhu.edu", action: "interfolio_rpt" },
+                    "Associate Professor": { type: "terminal", contact: "Aubrey Poysa", email: "apoysa1@jhu.edu", action: "interfolio_rpt" },
+                    "Assistant Professor": { type: "terminal", contact: "Sheri Green", email: "sheri@jhu.edu", action: "contact_only" },
                     "Research Professor": 2,
                     "Associate Research Professor": 3,
                     "Assistant Research Professor": { type: "terminal", contact: "Kirstin Brooks-Robinson", email: "wseacademicappta@jhu.edu", action: "SmartPath" },
@@ -483,10 +483,10 @@
                 htmlContent = `Email promotion dossier to:<br><br>
                 <strong>${result.contact}</strong><br>
                 <a href="mailto:${result.email}">${result.email}</a>`;
-            } else if (result.action === 'Interfolio RPT') {
-                htmlContent = `Request a new case in <strong>Interfolio RPT</strong> by contacting:<br><br>
-                <strong>${result.contact}</strong><br>
-                <a href="mailto:${result.email}">${result.email}</a>`;
+            } else if (result.action === 'interfolio_rpt') {
+                htmlContent = `Contact <strong>${result.contact}</strong> (<a href="mailto:${result.email}">${result.email}</a>) to request a new case in <strong>Interfolio RPT</strong>`;
+            } else if (result.action === 'contact_only') {
+                htmlContent = `Contact <strong>${result.contact}</strong> (<a href="mailto:${result.email}">${result.email}</a>)`;
             } else if (result.action === 'SmartPath') {
                 htmlContent = `Start an appointment request in <strong>SmartPath</strong>. Direct questions to:<br><br>
                 <strong>${result.contact}</strong><br>
