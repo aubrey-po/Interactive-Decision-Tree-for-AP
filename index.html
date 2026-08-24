@@ -443,6 +443,7 @@
 
             // Update button states
             btnBack.classList.toggle('hidden', history.length === 0);
+            btnNext.classList.remove('hidden');
             btnNext.disabled = true;
             btnReset.classList.add('hidden');
             progress.classList.remove('hidden');
