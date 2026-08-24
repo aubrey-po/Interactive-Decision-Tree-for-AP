@@ -300,81 +300,81 @@
     </div>
 
     <script>
-        // Decision tree data structure
+        // Decision tree data structure - with terminal nodes marked as "terminal"
         const decisionTree = {
             root: {
                 question: "What is the candidate's aspirational rank?",
                 answers: {
-                    "Professor": "Aubrey Poysa (apoysa1@jhu.edu)",
-                    "Associate Professor": "Aubrey Poysa (apoysa1@jhu.edu)",
-                    "Assistant Professor": "Sheri Green (sheri@jhu.edu)",
+                    "Professor": { type: "terminal", contact: "Aubrey Poysa", email: "apoysa1@jhu.edu", action: "Interfolio RPT" },
+                    "Associate Professor": { type: "terminal", contact: "Aubrey Poysa", email: "apoysa1@jhu.edu", action: "Interfolio RPT" },
+                    "Assistant Professor": { type: "terminal", contact: "Sheri Green", email: "sheri@jhu.edu", action: "Interfolio RPT" },
                     "Research Professor": 2,
                     "Associate Research Professor": 3,
-                    "Assistant Research Professor": "Kirstin Brooks-Robinson (wseacademicappta@jhu.edu)",
+                    "Assistant Research Professor": { type: "terminal", contact: "Kirstin Brooks-Robinson", email: "wseacademicappta@jhu.edu", action: "SmartPath" },
                     "Teaching Professor": 4,
                     "Associate Teaching Professor": 5,
-                    "Assistant Teaching Professor": "Kirstin Brooks-Robinson (wseacademicappta@jhu.edu)",
-                    "Professor of the Practice": "Kirstin Brooks-Robinson (wseacademicappta@jhu.edu)",
+                    "Assistant Teaching Professor": { type: "terminal", contact: "Kirstin Brooks-Robinson", email: "wseacademicappta@jhu.edu", action: "SmartPath" },
+                    "Professor of the Practice": { type: "terminal", contact: "Kirstin Brooks-Robinson", email: "wseacademicappta@jhu.edu", action: "SmartPath" },
                     "Senior Research Engineer/Scientist": 6,
                     "Associate Research Engineer/Scientist": 7,
-                    "Assistant Research Engineer/Scientist": "Kirstin Brooks-Robinson (wseacademicappta@jhu.edu)",
+                    "Assistant Research Engineer/Scientist": { type: "terminal", contact: "Kirstin Brooks-Robinson", email: "wseacademicappta@jhu.edu", action: "SmartPath" },
                     "Senior Lecturer (part-time or short-term only)": 8,
-                    "Lecturer (part-time or short-term only)": "Kirstin Brooks-Robinson (wseacademicappta@jhu.edu)",
-                    "Visiting Professor": "Kirstin Brooks-Robinson (wseacademicappta@jhu.edu)",
-                    "Visiting Associate Professor": "Kirstin Brooks-Robinson (wseacademicappta@jhu.edu)",
-                    "Visiting Assistant Professor": "Kirstin Brooks-Robinson (wseacademicappta@jhu.edu)",
-                    "Visiting Scholar": "Kirstin Brooks-Robinson (wseacademicappta@jhu.edu)",
-                    "Whiting Fellow": "Kirstin Brooks-Robinson (wseacademicappta@jhu.edu)",
-                    "Homewood Professor": "Kirstin Brooks-Robinson (wseacademicappta@jhu.edu)"
+                    "Lecturer (part-time or short-term only)": { type: "terminal", contact: "Kirstin Brooks-Robinson", email: "wseacademicappta@jhu.edu", action: "SmartPath" },
+                    "Visiting Professor": { type: "terminal", contact: "Kirstin Brooks-Robinson", email: "wseacademicappta@jhu.edu", action: "SmartPath" },
+                    "Visiting Associate Professor": { type: "terminal", contact: "Kirstin Brooks-Robinson", email: "wseacademicappta@jhu.edu", action: "SmartPath" },
+                    "Visiting Assistant Professor": { type: "terminal", contact: "Kirstin Brooks-Robinson", email: "wseacademicappta@jhu.edu", action: "SmartPath" },
+                    "Visiting Scholar": { type: "terminal", contact: "Kirstin Brooks-Robinson", email: "wseacademicappta@jhu.edu", action: "SmartPath" },
+                    "Whiting Fellow": { type: "terminal", contact: "Kirstin Brooks-Robinson", email: "wseacademicappta@jhu.edu", action: "SmartPath" },
+                    "Homewood Professor": { type: "terminal", contact: "Kirstin Brooks-Robinson", email: "wseacademicappta@jhu.edu", action: "SmartPath" }
                 }
             },
             2: {
                 question: "Does the candidate currently have an appointment as Associate or Assistant Research Professor?",
                 answers: {
-                    "Yes": "Kirstin Brooks-Robinson (wseacademicappta@jhu.edu)",
-                    "No": "Kirstin Brooks-Robinson (wseacademicappta@jhu.edu)"
+                    "Yes": { type: "terminal", contact: "Kirstin Brooks-Robinson", email: "wseacademicappta@jhu.edu", action: "promotion_dossier" },
+                    "No": { type: "terminal", contact: "Kirstin Brooks-Robinson", email: "wseacademicappta@jhu.edu", action: "SmartPath" }
                 }
             },
             3: {
                 question: "Does the candidate currently have an appointment as Assistant Research Professor?",
                 answers: {
-                    "Yes": "Kirstin Brooks-Robinson (wseacademicappta@jhu.edu)",
-                    "No": "Kirstin Brooks-Robinson (wseacademicappta@jhu.edu)"
+                    "Yes": { type: "terminal", contact: "Kirstin Brooks-Robinson", email: "wseacademicappta@jhu.edu", action: "promotion_dossier" },
+                    "No": { type: "terminal", contact: "Kirstin Brooks-Robinson", email: "wseacademicappta@jhu.edu", action: "SmartPath" }
                 }
             },
             4: {
                 question: "Does the candidate currently have an appointment as Associate or Assistant Teaching Professor?",
                 answers: {
-                    "Yes": "Kirstin Brooks-Robinson (wseacademicappta@jhu.edu)",
-                    "No": "Kirstin Brooks-Robinson (wseacademicappta@jhu.edu)"
+                    "Yes": { type: "terminal", contact: "Kirstin Brooks-Robinson", email: "wseacademicappta@jhu.edu", action: "promotion_dossier" },
+                    "No": { type: "terminal", contact: "Kirstin Brooks-Robinson", email: "wseacademicappta@jhu.edu", action: "SmartPath" }
                 }
             },
             5: {
                 question: "Does the candidate currently have an appointment as Assistant Teaching Professor?",
                 answers: {
-                    "Yes": "Kirstin Brooks-Robinson (wseacademicappta@jhu.edu)",
-                    "No": "Kirstin Brooks-Robinson (wseacademicappta@jhu.edu)"
+                    "Yes": { type: "terminal", contact: "Kirstin Brooks-Robinson", email: "wseacademicappta@jhu.edu", action: "promotion_dossier" },
+                    "No": { type: "terminal", contact: "Kirstin Brooks-Robinson", email: "wseacademicappta@jhu.edu", action: "SmartPath" }
                 }
             },
             6: {
                 question: "Does the candidate currently have an appointment as Associate or Assistant Research Engineer/Scientist?",
                 answers: {
-                    "Yes": "Kirstin Brooks-Robinson (wseacademicappta@jhu.edu)",
-                    "No": "Kirstin Brooks-Robinson (wseacademicappta@jhu.edu)"
+                    "Yes": { type: "terminal", contact: "Kirstin Brooks-Robinson", email: "wseacademicappta@jhu.edu", action: "promotion_dossier" },
+                    "No": { type: "terminal", contact: "Kirstin Brooks-Robinson", email: "wseacademicappta@jhu.edu", action: "SmartPath" }
                 }
             },
             7: {
                 question: "Does the candidate currently have an appointment as Assistant Research Engineer/Scientist?",
                 answers: {
-                    "Yes": "Kirstin Brooks-Robinson (wseacademicappta@jhu.edu)",
-                    "No": "Kirstin Brooks-Robinson (wseacademicappta@jhu.edu)"
+                    "Yes": { type: "terminal", contact: "Kirstin Brooks-Robinson", email: "wseacademicappta@jhu.edu", action: "promotion_dossier" },
+                    "No": { type: "terminal", contact: "Kirstin Brooks-Robinson", email: "wseacademicappta@jhu.edu", action: "SmartPath" }
                 }
             },
             8: {
                 question: "Does the candidate currently have an appointment as Lecturer?",
                 answers: {
-                    "Yes": "Kirstin Brooks-Robinson (wseacademicappta@jhu.edu)",
-                    "No": "Kirstin Brooks-Robinson (wseacademicappta@jhu.edu)"
+                    "Yes": { type: "terminal", contact: "Kirstin Brooks-Robinson", email: "wseacademicappta@jhu.edu", action: "promotion_dossier" },
+                    "No": { type: "terminal", contact: "Kirstin Brooks-Robinson", email: "wseacademicappta@jhu.edu", action: "SmartPath" }
                 }
             }
         };
@@ -460,10 +460,10 @@
 
             history.push({ node: currentNode, answer: selectedAnswer });
 
-            if (typeof result === 'string') {
+            if (typeof result === 'object' && result.type === 'terminal') {
                 // Terminal node - show result
-                showResult(selectedAnswer, result);
-            } else {
+                showResult(result);
+            } else if (typeof result === 'number') {
                 // Continue to next node
                 currentNode = result;
                 renderQuestion();
@@ -471,39 +471,25 @@
         });
 
         // Show result
-        function showResult(answer, contact) {
-            const node = decisionTree[currentNode];
-            
+        function showResult(result) {
             questionContainer.classList.add('hidden');
             resultContainer.classList.remove('hidden');
 
             let htmlContent = '';
             
             // Determine the action based on the result
-            if (contact.includes('@jhu.edu')) {
-                const emailParts = contact.match(/([^(]+)\s*\(([^)]+)\)/);
-                if (emailParts) {
-                    const name = emailParts[1].trim();
-                    const email = emailParts[2].trim();
-                    htmlContent = `Request a new case in <strong>Interfolio RPT</strong> by contacting:<br><br>
-                    <strong>${name}</strong><br>
-                    <a href="mailto:${email}">${email}</a>`;
-                }
-            } else {
-                htmlContent = `${contact}<br><br>
-                Start an appointment request in <strong>SmartPath</strong>. Direct questions to:<br>
-                <strong>Kirstin Brooks-Robinson</strong><br>
-                <a href="mailto:wseacademicappta@jhu.edu">wseacademicappta@jhu.edu</a>`;
-            }
-
-            // Check if this is a promotion path
-            if (history.length > 1) {
-                const firstNode = decisionTree[currentNode];
-                if (firstNode && firstNode.question.includes('appointment')) {
-                    htmlContent = `Email promotion dossier to:<br><br>
-                    <strong>Kirstin Brooks-Robinson</strong><br>
-                    <a href="mailto:wseacademicappta@jhu.edu">wseacademicappta@jhu.edu</a>`;
-                }
+            if (result.action === 'promotion_dossier') {
+                htmlContent = `Email promotion dossier to:<br><br>
+                <strong>${result.contact}</strong><br>
+                <a href="mailto:${result.email}">${result.email}</a>`;
+            } else if (result.action === 'Interfolio RPT') {
+                htmlContent = `Request a new case in <strong>Interfolio RPT</strong> by contacting:<br><br>
+                <strong>${result.contact}</strong><br>
+                <a href="mailto:${result.email}">${result.email}</a>`;
+            } else if (result.action === 'SmartPath') {
+                htmlContent = `Start an appointment request in <strong>SmartPath</strong>. Direct questions to:<br><br>
+                <strong>${result.contact}</strong><br>
+                <a href="mailto:${result.email}">${result.email}</a>`;
             }
 
             resultText.innerHTML = htmlContent;
@@ -519,24 +505,21 @@
         btnBack.addEventListener('click', () => {
             if (history.length > 0) {
                 history.pop();
-                currentNode = history.length > 0 ? history[history.length - 1].node : 'root';
                 
-                if (history.length > 0) {
-                    const prevAnswer = history[history.length - 1].answer;
-                    const prevNode = decisionTree[history[history.length - 1].node];
-                    const result = prevNode.answers[prevAnswer];
-                    
-                    if (typeof result === 'string') {
-                        history.pop();
-                        currentNode = 'root';
-                    } else {
-                        currentNode = result;
-                    }
-                } else {
+                if (history.length === 0) {
                     currentNode = 'root';
+                } else {
+                    const prevEntry = history[history.length - 1];
+                    const prevNode = decisionTree[prevEntry.node];
+                    const prevResult = prevNode.answers[prevEntry.answer];
+                    
+                    if (typeof prevResult === 'number') {
+                        currentNode = prevResult;
+                    } else {
+                        currentNode = prevEntry.node;
+                    }
                 }
                 
-                history.pop();
                 renderQuestion();
             }
         });
