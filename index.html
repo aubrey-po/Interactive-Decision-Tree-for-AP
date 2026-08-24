@@ -219,29 +219,6 @@
             display: none;
         }
 
-        .progress {
-            margin-bottom: 25px;
-            color: #666;
-            font-size: 13px;
-            font-weight: 500;
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 6px;
-            background: #e8e8e8;
-            border-radius: 3px;
-            margin-top: 8px;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: #002D72;
-            border-radius: 3px;
-            transition: width 0.3s ease;
-        }
-
         @media (max-width: 600px) {
             .container {
                 padding: 25px;
@@ -268,13 +245,6 @@
         <div class="header">
             <h1>Initiating Faculty Appointments and Promotions</h1>
             <p class="subtitle">Whiting School of Engineering - Administrative Guide</p>
-        </div>
-
-        <div id="progress" class="progress hidden">
-            <span id="progressText"></span>
-            <div class="progress-bar">
-                <div class="progress-fill" id="progressFill"></div>
-            </div>
         </div>
 
         <div id="questionContainer">
@@ -382,7 +352,6 @@
         // State management
         let currentNode = 'root';
         let history = [];
-        let totalSteps = 0;
 
         // DOM elements
         const questionContainer = document.getElementById('questionContainer');
@@ -394,29 +363,12 @@
         const btnBack = document.getElementById('btnBack');
         const btnNext = document.getElementById('btnNext');
         const btnReset = document.getElementById('btnReset');
-        const progress = document.getElementById('progress');
-        const progressText = document.getElementById('progressText');
-        const progressFill = document.getElementById('progressFill');
-
-        // Count total possible steps
-        function countTotalSteps() {
-            let max = 1;
-            for (let nodeId in decisionTree) {
-                if (nodeId !== 'root') {
-                    max = Math.max(max, parseInt(nodeId));
-                }
-            }
-            return max + 1;
-        }
-
-        totalSteps = countTotalSteps();
 
         // Initialize
         function init() {
             currentNode = 'root';
             history = [];
             renderQuestion();
-            updateProgress();
         }
 
         // Render current question
@@ -446,9 +398,6 @@
             btnNext.classList.remove('hidden');
             btnNext.disabled = true;
             btnReset.classList.add('hidden');
-            progress.classList.remove('hidden');
-
-            updateProgress();
         }
 
         // Handle next button
@@ -499,7 +448,6 @@
             btnBack.classList.remove('hidden');
             btnNext.classList.add('hidden');
             btnReset.classList.remove('hidden');
-            progress.classList.add('hidden');
         }
 
         // Handle back button
@@ -534,13 +482,6 @@
         answerDropdown.addEventListener('change', (e) => {
             btnNext.disabled = e.target.value === '';
         });
-
-        // Update progress bar
-        function updateProgress() {
-            const stepCount = history.length + 1;
-            progressText.textContent = `Step ${stepCount} of ${totalSteps}`;
-            progressFill.style.width = (stepCount / totalSteps) * 100 + '%';
-        }
 
         // Start the application
         init();
